@@ -4,7 +4,19 @@
 <meta charset="UTF-8">
 <title>Happy Birthday Swara</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<!-- ✅ GOOGLE ANALYTICS (ADDED CORRECTLY) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRN9VRZFDY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SRN9VRZFDY');
+</script>
+<!-- ✅ END GOOGLE ANALYTICS -->
 
 <style>
 body {
@@ -108,7 +120,7 @@ p {
 <div class="card" id="card">
     <h1>Happy Birthday Swara 🎉</h1>
     <p>May your life be filled with love, laughter and beautiful moments 💖</p>
-    <p>May your day as beautiful as your smile ✨</p>
+    <p>May your day be as beautiful as your smile ✨</p>
     <div class="cake" onclick="cutCake()">🎂</div>
     <p>(Click the cake)</p>
 </div>
@@ -148,7 +160,6 @@ function animate() {
 }
 animate();
 
-// Countdown Logic
 let count = 3;
 const countdownEl = document.getElementById("countdown");
 const card = document.getElementById("card");
@@ -172,7 +183,6 @@ function cutCake() {
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.fontSize = (Math.random() * 20 + 15) + "px";
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 6000);
     }
     alert("🎉 Cake Cut! Happy Birthday Swara 💖🎂\nMay all your dreams come true ✨");
