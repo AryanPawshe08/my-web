@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Swara</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #ff69b4, #ffb6c1, #ffc0cb);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.countdown {
+    position: absolute;
+    font-size: 100px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 20px hotpink;
+    animation: pop 1s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.card {
+    display: none;
+    background: rgba(128, 0, 128, 0.35);
+    backdrop-filter: blur(18px);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 50px rgba(186, 85, 211, 0.8);
+    animation: fadeIn 2s ease;
+    max-width: 90%;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 65px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px #ff69b4;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.cake {
+    font-size: 90px;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+}
+
+.cake:hover {
+    transform: scale(1.2);
+}
+
+.heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="countdown" id="countdown">3</div>
+
+<div class="card" id="card">
+    <h1>Happy Birthday Swara 🎉</h1>
+    <p>May your life be filled with love, laughter and beautiful moments 💖</p>
+    <p>May your day as beautiful as your smile ✨</p>
+    <div class="cake" onclick="cutCake()">🎂</div>
+    <p>(Click the cake)</p>
+</div>
+
+<script>
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+let stars = [];
+for (let i = 0; i < 200; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2,
+        dy: Math.random() * 0.5 + 0.2
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.8)";
+    stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        s.y += s.dy;
+        if (s.y > canvas.height) s.y = 0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+// Countdown Logic
+let count = 3;
+const countdownEl = document.getElementById("countdown");
+const card = document.getElementById("card");
+
+const timer = setInterval(() => {
+    count--;
+    if (count > 0) {
+        countdownEl.textContent = count;
+    } else {
+        clearInterval(timer);
+        countdownEl.style.display = "none";
+        card.style.display = "block";
+    }
+}, 1000);
+
+function cutCake() {
+    for (let i = 0; i < 30; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+    alert("🎉 Cake Cut! Happy Birthday Swara 💖🎂\nMay all your dreams come true ✨");
+}
+</script>
+
+</body>
+</html>
